@@ -26,9 +26,9 @@ This project is based on [voxelgame](https://github.com/Zylann/voxelgame), and a
 [ ] Saving worlds based on name, ID, and version
 
 ### Gameplay
-[ ] Crafting system for items
-[ ] Life, hunger, and hydration system
-[ ] Limiting water spread across terrain
+[ ] Crafting system for items<br>
+[ ] Life, hunger, and hydration system<br>
+[ ] Limiting water spread across terrain<br>
 
 ### Lighting
 [ ] Ambient lighting and voxel ambient occlusion, similar to Minecraft

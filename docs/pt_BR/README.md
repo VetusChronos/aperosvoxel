@@ -27,9 +27,9 @@ e já possui:
 [ ] Salvamento dos mundos baseados em um nome, id e versão
 
 ### Gameplay
-[ ] Sistema de crafting dos itens
-[ ] Sistema de vida, fome e hidratação
-[ ] Limitar o avanço da água no terreno
+[ ] Sistema de crafting dos itens<br>
+[ ] Sistema de vida, fome e hidratação<br>
+[ ] Limitar o avanço da água no terreno<br>
 
 ### Iluminação
 [ ] Iluminação ambiente e oclusão ambiente voxel, semelhante ao do Minecraft
