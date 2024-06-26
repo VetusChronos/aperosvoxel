@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dungrukis54l4"
+path="res://.godot/imported/log_y.obj-0f93880e1fc7a398ffe5f38de8926ecf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/log_y.obj-0f93880e1fc7a398ffe5f38de8926ecf.mesh"]
+
+source_file="res://src/blocks/log/log_y.obj"
+dest_files=["res://.godot/imported/log_y.obj-0f93880e1fc7a398ffe5f38de8926ecf.mesh", "res://.godot/imported/log_y.obj-0f93880e1fc7a398ffe5f38de8926ecf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

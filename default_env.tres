@@ -1,0 +1,17 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://dve2k7w0d1jua"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_otygd"]
+sky_top_color = Color(0.483802, 0.588368, 0.828538, 1)
+sky_curve = 0.31058
+ground_curve = 119.938
+sun_angle_max = 35.0
+sun_curve = 0.243676
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("ProceduralSkyMaterial_otygd")
+
+[resource]
+background_mode = 2
+sky = SubResource("1")
+ambient_light_source = 3
+reflected_light_source = 1

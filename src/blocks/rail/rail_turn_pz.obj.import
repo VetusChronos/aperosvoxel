@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmt0xks6jivyi"
+path="res://.godot/imported/rail_turn_pz.obj-461d48cdf88c9f146cd9e10e3eac57fc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/rail_turn_pz.obj-461d48cdf88c9f146cd9e10e3eac57fc.mesh"]
+
+source_file="res://src/blocks/rail/rail_turn_pz.obj"
+dest_files=["res://.godot/imported/rail_turn_pz.obj-461d48cdf88c9f146cd9e10e3eac57fc.mesh", "res://.godot/imported/rail_turn_pz.obj-461d48cdf88c9f146cd9e10e3eac57fc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

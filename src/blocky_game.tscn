@@ -1,0 +1,72 @@
+[gd_scene load_steps=14 format=3 uid="uid://dtfktti54mneg"]
+
+[ext_resource type="VoxelMesherBlocky" uid="uid://c6l3pdnhmvhqp" path="res://src/blocks/mesher.tres" id="1"]
+[ext_resource type="VoxelGeneratorScript" path="res://src/generator/world_generator.tres" id="4"]
+[ext_resource type="Environment" uid="uid://dve2k7w0d1jua" path="res://default_env.tres" id="4_ku3n7"]
+[ext_resource type="Script" path="res://src/blocky_game.gd" id="5"]
+[ext_resource type="Script" path="res://src/debug_info.gd" id="8"]
+[ext_resource type="Script" path="res://src/globals.gd" id="8_4wkyd"]
+[ext_resource type="Script" path="res://src/blocks/blocks.gd" id="12"]
+[ext_resource type="Script" path="res://src/items/item_db.gd" id="13"]
+
+[sub_resource type="VoxelStreamRegionFiles" id="3"]
+directory = "res://resources/worlds"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g45w2"]
+noise_type = 3
+frequency = 0.04
+fractal_octaves = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_20gc6"]
+noise_type = 3
+frequency = 0.001
+fractal_octaves = 6
+fractal_lacunarity = 2.2
+domain_warp_enabled = true
+domain_warp_amplitude = 15.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ebfo8"]
+noise_type = 3
+fractal_octaves = 3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aoiog"]
+noise_type = 3
+
+[node name="Game" type="Node"]
+script = ExtResource("5")
+
+[node name="Blocks" type="Node" parent="."]
+script = ExtResource("12")
+
+[node name="Items" type="Node" parent="."]
+script = ExtResource("13")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_ku3n7")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.97321, 0.172326, -0.152202, -0.0478236, 0.495785, 0.867127, 0.224888, 0.851176, -0.474262, 1.51966, 19.7004, 14.0879)
+shadow_enabled = true
+shadow_reverse_cull_face = true
+directional_shadow_mode = 0
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="."]
+stream = SubResource("3")
+generator = ExtResource("4")
+mesher = ExtResource("1")
+gi_mode = 1
+cast_shadow = 2
+generate_collisions = false
+run_stream_in_editor = false
+
+[node name="DebugInfo" type="Node" parent="."]
+script = ExtResource("8")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Terrain" type="Node" parent="."]
+script = ExtResource("8_4wkyd")
+_biome_noise = SubResource("FastNoiseLite_g45w2")
+_terrain_noise = SubResource("FastNoiseLite_20gc6")
+_temperature_noise = SubResource("FastNoiseLite_ebfo8")
+_erosion_noise = SubResource("FastNoiseLite_aoiog")

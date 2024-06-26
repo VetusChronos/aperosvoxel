@@ -1,0 +1,208 @@
+[gd_scene load_steps=5 format=3 uid="uid://s7ka3uaffj22"]
+
+[ext_resource type="Script" path="res://src/main.gd" id="1_33xa8"]
+[ext_resource type="Script" path="res://src/main_menu.gd" id="2_koemg"]
+[ext_resource type="FontFile" uid="uid://d0vy3ht5eg6k" path="res://assets/fonts/LanaPixel.ttf" id="3_73yeo"]
+[ext_resource type="Texture2D" uid="uid://dn54sbkk12xyj" path="res://assets/menu/background.png" id="4_cwp6k"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_33xa8")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_koemg")
+
+[node name="Background" type="TextureRect" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -154.0
+offset_right = 384.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_cwp6k")
+
+[node name="MainMenu" type="Control" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.5
+offset_top = 98.0
+offset_right = 201.5
+offset_bottom = 186.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 72
+text = "Aperos Voxel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Singleplayer" type="Button" parent="GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487
+anchor_top = 0.389
+anchor_right = 0.487
+anchor_bottom = 0.389
+offset_left = -180.024
+offset_top = 22.928
+offset_right = 208.976
+offset_bottom = 75.9279
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 32
+text = "SINGLEPLAYER"
+
+[node name="Multiplayer" type="Button" parent="GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487
+anchor_top = 0.396
+anchor_right = 0.487
+anchor_bottom = 0.396
+offset_left = -180.024
+offset_top = 90.392
+offset_right = 207.976
+offset_bottom = 143.392
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 32
+text = "MULTIPLAYER"
+
+[node name="Splashes" type="Label" parent="GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.568
+anchor_top = 0.219
+anchor_right = 0.568
+anchor_bottom = 0.219
+offset_left = 16.664
+offset_top = 45.088
+offset_right = 206.664
+offset_bottom = 72.088
+grow_horizontal = 2
+rotation = -0.345836
+theme_override_colors/font_color = Color(0.925117, 0.836057, 0.334062, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 26
+text = "v0.0.1.alpha_dev"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorldCreation" type="Control" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="GUI/WorldCreation"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -201.5
+offset_top = 54.0
+offset_right = 201.5
+offset_bottom = 142.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 64
+text = "World Creation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Create" type="Button" parent="GUI/WorldCreation"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487
+anchor_top = 0.389
+anchor_right = 0.487
+anchor_bottom = 0.389
+offset_left = -182.024
+offset_top = 127.928
+offset_right = 206.976
+offset_bottom = 180.928
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 26
+text = "Create"
+
+[node name="Back" type="Button" parent="GUI/WorldCreation"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487
+anchor_top = 0.396
+anchor_right = 0.487
+anchor_bottom = 0.396
+offset_left = -181.024
+offset_top = 182.392
+offset_right = 206.976
+offset_bottom = 235.392
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 26
+text = "Back"
+
+[node name="WorldName" type="TextEdit" parent="GUI/WorldCreation"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.486
+anchor_top = 0.414
+anchor_right = 0.486
+anchor_bottom = 0.414
+offset_left = -154.872
+offset_top = -40.272
+offset_right = 155.128
+offset_bottom = -0.272034
+placeholder_text = "World name"
+text_direction = 1
+language = "en"
+
+[node name="Seed" type="TextEdit" parent="GUI/WorldCreation"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.486
+anchor_top = 0.431
+anchor_right = 0.486
+anchor_bottom = 0.431
+offset_left = -154.872
+offset_top = -0.288025
+offset_right = 155.128
+offset_bottom = 39.712
+
+[node name="Version" type="Label" parent="GUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -42.0
+offset_right = 222.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 26
+text = "v0.0.1.alpha_dev"
+vertical_alignment = 1
+
+[connection signal="singleplayer_requested" from="GUI" to="." method="_on_main_menu_singleplayer_requested"]
+[connection signal="pressed" from="GUI/MainMenu/Singleplayer" to="GUI" method="_on_singleplayer_button_pressed"]
+[connection signal="pressed" from="GUI/WorldCreation/Create" to="GUI" method="_on_create_pressed"]
+[connection signal="pressed" from="GUI/WorldCreation/Back" to="GUI" method="_on_back_button_pressed"]

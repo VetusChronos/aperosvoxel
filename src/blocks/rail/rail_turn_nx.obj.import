@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://gtm7tbbwvroc"
+path="res://.godot/imported/rail_turn_nx.obj-242cf31bb957a45e8d03bd2ab7a5289b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/rail_turn_nx.obj-242cf31bb957a45e8d03bd2ab7a5289b.mesh"]
+
+source_file="res://src/blocks/rail/rail_turn_nx.obj"
+dest_files=["res://.godot/imported/rail_turn_nx.obj-242cf31bb957a45e8d03bd2ab7a5289b.mesh", "res://.godot/imported/rail_turn_nx.obj-242cf31bb957a45e8d03bd2ab7a5289b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
