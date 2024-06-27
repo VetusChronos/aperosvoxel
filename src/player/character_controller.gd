@@ -1,14 +1,16 @@
 extends Node3D
 
-@export var speed := 5.0
-@export var gravity := 9.8
-@export var jump_force := 5.0
-@export var head : NodePath
+@export var speed : float = 5.0
+@export var gravity : float = 9.8
+@export var jump_force : float = 5.0
+@export var speed_booster : float = 8.5
+@export var speed_shift : float = 2.5
 
+@export var head : NodePath
 @export var terrain : NodePath
 
-var _velocity := Vector3()
-var _grounded := false
+var _velocity : Vector3 = Vector3()
+var _grounded : bool = false
 var _head : Node3D = null
 var _box_mover := VoxelBoxMover.new()
 
@@ -36,7 +38,12 @@ func _physics_process(delta: float):
 	if Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_D):
 		motor += right
 	
-	motor = motor.normalized() * speed
+	if Input.is_key_pressed(KEY_CTRL):
+		motor = motor.normalized() * speed_booster
+	elif Input.is_key_pressed(KEY_SHIFT):
+		motor = motor.normalized() * speed_shift
+	else:
+		motor = motor.normalized() * speed
 	
 	_velocity.x = motor.x
 	_velocity.z = motor.z

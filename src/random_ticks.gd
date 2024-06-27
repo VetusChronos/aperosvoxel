@@ -2,14 +2,14 @@ extends Node
 
 const VoxelLibraryResource = preload("./blocks/voxel_library.tres")
 
-const RADIUS = 100
-const VOXELS_PER_FRAME = 512
+const RADIUS : int = 100
+const VOXELS_PER_FRAME : int = 512
 
 @onready var _terrain : VoxelTerrain = get_node("../VoxelTerrain")
-@onready var _voxel_tool := _terrain.get_voxel_tool()
+@onready var _voxel_tool : VoxelTool = _terrain.get_voxel_tool()
 @onready var _players_container : Node = get_node("../Players")
 
-var _grass_dirs = [
+var _grass_dirs : Array = [
 	Vector3(-1, 0, 0), Vector3(1, 0, 0),
 	Vector3(0, 0, -1), Vector3(0, 0, 1),
 	Vector3(-1, 0, -1), Vector3(1, 0, -1),
@@ -38,8 +38,8 @@ func _process(_delta):
 	for i in _players_container.get_child_count():
 		var character : Node3D = _players_container.get_child(i)
 		var center = character.position.floor()
-		var r := RADIUS
-		var area = AABB(center - Vector3(r, r, r), 2 * Vector3(r, r, r))
+		var r : float = RADIUS
+		var area : AABB = AABB(center - Vector3(r, r, r), 2 * Vector3(r, r, r))
 		
 		# Check for overlapping players
 		var overlapping_players = []

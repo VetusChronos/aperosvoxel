@@ -3,7 +3,7 @@ extends "../item.gd"
 const Rocket = preload("./rocket.gd")
 const RocketScene = preload("./rocket.tscn")
 
-const SERVER_PEER_ID = 1
+const SERVER_PEER_ID : float = 1
 
 @onready var _world : Node = get_node("/root/Main/Game")
 
@@ -57,4 +57,3 @@ func receive_spawn_rocket(id: int, position: Vector3, direction: Vector3):
 
 	# We could also play some effects when shooting so the player can have immediate feedback,
 	# and would help hiding the fact the rocket is spawning a bit late?
-

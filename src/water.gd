@@ -2,11 +2,11 @@ extends Node
 
 const Blocks = preload("./blocks/blocks.gd")
 
-const MAX_UPDATES_PER_FRAME = 64
-const INTERVAL_SECONDS = 0.2
-const MAX_SPREAD_DISTANCE = 8
+const MAX_UPDATES_PER_FRAME : int = 64
+const INTERVAL_SECONDS : int = 0.2
+const MAX_SPREAD_DISTANCE : int = 8
 
-const _spread_directions = [
+const _spread_directions : Array = [
 	Vector3(-1, 0, 0),
 	Vector3(1, 0, 0),
 	Vector3(0, 0, -1),
@@ -14,12 +14,12 @@ const _spread_directions = [
 ]
 
 @onready var _terrain : VoxelTerrain = get_node("../VoxelTerrain")
-@onready var _terrain_tool := _terrain.get_voxel_tool()
+@onready var _terrain_tool : VoxelTool = _terrain.get_voxel_tool()
 @onready var _blocks : Blocks = get_node("../Blocks")
 
 class Queue:
-	var _queue := []
-	var _front := 0
+	var _queue : Array = []
+	var _front : int = 0
 
 	func push_back(item):
 		_queue.append(item)
@@ -34,9 +34,9 @@ class Queue:
 	func size():
 		return len(_queue) - _front
 
-var _update_queue := Queue.new()
-var _process_queue := Queue.new()
-var _scheduled_positions := {}
+var _update_queue : Queue = Queue.new()
+var _process_queue : Queue = Queue.new()
+var _scheduled_positions : Dictionary = {}
 var _water_id : int = -1
 var _water_top : int = -1
 var _water_full : int = -1

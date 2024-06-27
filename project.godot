@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="AperosVoxel"
-config/version="0.0.1.alpha_dev"
+config/version="0.0.2.alpha_dev"
 run/main_scene="res://src/main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="aperosvoxel"
 config/features=PackedStringArray("4.3", "Double Precision")
 config/icon="res://icon.png"
 
@@ -27,6 +29,10 @@ Globals="*res://src/globals.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
+
+[editor]
+
+naming/script_name_casing=2
 
 [editor_plugins]
 
