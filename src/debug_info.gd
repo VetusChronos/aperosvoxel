@@ -9,7 +9,7 @@ var _network_stats := []
 
 
 func _process(delta: float):
-	DDD.set_text("Seed", Globals._seed)
+	DDD.set_text("Seed", int(Globals._terrain_noise.seed))
 	
 	"""
 	var sm := OS.get_static_memory_usage()

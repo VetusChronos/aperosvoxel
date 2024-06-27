@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://s7ka3uaffj22"]
+[gd_scene load_steps=4 format=3 uid="uid://s7ka3uaffj22"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_33xa8"]
 [ext_resource type="Script" path="res://src/main_menu.gd" id="2_koemg"]
 [ext_resource type="FontFile" uid="uid://d0vy3ht5eg6k" path="res://assets/fonts/LanaPixel.ttf" id="3_73yeo"]
-[ext_resource type="Texture2D" uid="uid://dn54sbkk12xyj" path="res://assets/menu/background.png" id="4_cwp6k"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_33xa8")
@@ -28,7 +27,6 @@ offset_right = 384.0
 offset_bottom = 154.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_cwp6k")
 
 [node name="MainMenu" type="Control" parent="GUI"]
 layout_mode = 1
@@ -87,21 +85,21 @@ text = "MULTIPLAYER"
 [node name="Splashes" type="Label" parent="GUI/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.568
+anchor_left = 0.606
 anchor_top = 0.219
-anchor_right = 0.568
+anchor_right = 0.606
 anchor_bottom = 0.219
-offset_left = 16.664
-offset_top = 45.088
-offset_right = 206.664
-offset_bottom = 72.088
+offset_left = -21.112
+offset_top = 54.088
+offset_right = 168.888
+offset_bottom = 81.088
 grow_horizontal = 2
 rotation = -0.345836
 theme_override_colors/font_color = Color(0.925117, 0.836057, 0.334062, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_73yeo")
 theme_override_font_sizes/font_size = 26
-text = "v0.0.1.alpha_dev"
+text = "AperosVoxel!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -199,10 +197,34 @@ offset_right = 222.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_73yeo")
 theme_override_font_sizes/font_size = 26
-text = "v0.0.1.alpha_dev"
 vertical_alignment = 1
+
+[node name="WarningAssets" type="Label" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = 113.0
+offset_right = 289.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_73yeo")
+theme_override_font_sizes/font_size = 45
+text = "Assets not found. Downloading..."
+
+[node name="AssetsDownloadHTTP" type="HTTPRequest" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="singleplayer_requested" from="GUI" to="." method="_on_main_menu_singleplayer_requested"]
 [connection signal="pressed" from="GUI/MainMenu/Singleplayer" to="GUI" method="_on_singleplayer_button_pressed"]
 [connection signal="pressed" from="GUI/WorldCreation/Create" to="GUI" method="_on_create_pressed"]
 [connection signal="pressed" from="GUI/WorldCreation/Back" to="GUI" method="_on_back_button_pressed"]
+[connection signal="request_completed" from="AssetsDownloadHTTP" to="." method="_on_assets_download_request_completed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

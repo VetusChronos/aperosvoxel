@@ -1,19 +1,19 @@
 
 extends MeshInstance3D
 
-@export var size = 4
-@export var step = 16
+@export var size : int = 4
+@export var step : int = 16
 
 
 func _ready():
 	
-	var st = SurfaceTool.new()
+	var st : SurfaceTool = SurfaceTool.new()
 	
 	st.begin(Mesh.PRIMITIVE_LINES)
 	
 	st.add_color(Color(0,0,0))
 	
-	var wsize = step * size
+	var wsize : int = step * size
 	
 	for i in range(0, size+1):
 		for j in range(0, size+1):

@@ -1,10 +1,10 @@
 const Structure = preload("./structure.gd")
 
-var trunk_len_min := 4
-var trunk_len_max := 8
-var log_type := 1
-var leaves_type := 2
-var channel := VoxelBuffer.CHANNEL_TYPE
+var trunk_len_min : int = 4
+var trunk_len_max : int = 8
+var log_type : int = 1
+var leaves_type : int = 2
+var channel : VoxelBuffer.ChannelId = VoxelBuffer.CHANNEL_TYPE
 
 
 func generate() -> Structure:

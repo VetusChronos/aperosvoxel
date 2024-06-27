@@ -4,7 +4,7 @@ const ROOT = "res://src/items"
 
 const Item = preload("./item.gd")
 
-var _items := []
+var _items : Array = []
 
 
 func _init():

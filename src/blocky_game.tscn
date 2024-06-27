@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtfktti54mneg"]
+[gd_scene load_steps=16 format=3 uid="uid://dtfktti54mneg"]
 
 [ext_resource type="VoxelMesherBlocky" uid="uid://c6l3pdnhmvhqp" path="res://src/blocks/mesher.tres" id="1"]
 [ext_resource type="VoxelGeneratorScript" path="res://src/generator/world_generator.tres" id="4"]
@@ -10,12 +10,13 @@
 [ext_resource type="Script" path="res://src/items/item_db.gd" id="13"]
 
 [sub_resource type="VoxelStreamRegionFiles" id="3"]
-directory = "res://resources/worlds"
+directory = "user://resources/worlds"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_g45w2"]
 noise_type = 3
-frequency = 0.04
+frequency = 0.001
 fractal_octaves = 2
+domain_warp_enabled = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_20gc6"]
 noise_type = 3
@@ -29,8 +30,16 @@ domain_warp_amplitude = 15.0
 noise_type = 3
 fractal_octaves = 3
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sft5d"]
+noise_type = 3
+frequency = 0.001
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_aoiog"]
 noise_type = 3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fdcjp"]
+noise_type = 3
+frequency = 0.001
 
 [node name="Game" type="Node"]
 script = ExtResource("5")
@@ -56,6 +65,8 @@ generator = ExtResource("4")
 mesher = ExtResource("1")
 gi_mode = 1
 cast_shadow = 2
+bounds = AABB(-5.36871e+08, -128, -5.36871e+08, 1.07374e+09, 256, 1.07374e+09)
+max_view_distance = 256
 generate_collisions = false
 run_stream_in_editor = false
 
@@ -69,4 +80,6 @@ script = ExtResource("8_4wkyd")
 _biome_noise = SubResource("FastNoiseLite_g45w2")
 _terrain_noise = SubResource("FastNoiseLite_20gc6")
 _temperature_noise = SubResource("FastNoiseLite_ebfo8")
+_humidity_noise = SubResource("FastNoiseLite_sft5d")
 _erosion_noise = SubResource("FastNoiseLite_aoiog")
+_cave_noise = SubResource("FastNoiseLite_fdcjp")

@@ -1,6 +1,6 @@
 extends Node3D
 
-const LIFETIME = 10.0
+const LIFETIME : float = 10.0
 
 const DebrisScene = preload("./debris.tscn")
 const ExplosionScene = preload("./rocket_explosion.tscn")
@@ -8,9 +8,9 @@ const ExplosionScene = preload("./rocket_explosion.tscn")
 @onready var _terrain : VoxelTerrain = get_node("../VoxelTerrain")
 @onready var _terrain_tool := _terrain.get_voxel_tool()
 
-var _direction := Vector3(0, 0, 1)
-var _speed := 20.0
-var _remaining_time := LIFETIME
+var _direction : Vector3 = Vector3(0, 0, 1)
+var _speed : float = 20.0
+var _remaining_time : float = LIFETIME
 
 
 func set_direction(direction: Vector3):
@@ -77,5 +77,3 @@ func _create_explosion_vfx(explosion_pos: Vector3):
 		debris.set_velocity(debris_velocity)
 		debris.position = explosion_pos
 		get_parent().add_child(debris)
-
-

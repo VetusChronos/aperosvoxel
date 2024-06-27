@@ -1,6 +1,6 @@
 # Aperos Voxel
 
-Aperos Voxel é um jogo voxel inspirado no Minecraft 
+Aperos Voxel é um jogo voxel RPG de sobrevivência inspirado no Minecraft 
 feito na Godot Engine v4.3.beta2 utilizando o modulo [godot_voxel](https://github.com/Zylann/godot_voxel).
 
 Ainda está em fase alpha, e possui diversos problemas.
@@ -20,6 +20,10 @@ e já possui:
 
 ## TO-DO:
 
+### Assets
+[x] Baixar ativos automaticamente se eles não existirem no diretório `user`<br>
+[ ] Script de configuração para baixar ativos automaticamente (para desenvolvedores)<br>
+
 ### Terrain
 [ ] Geração de biomas mais completo, levando em consideração a temperatura, erosão e altura
 
@@ -31,8 +35,14 @@ e já possui:
 [ ] Sistema de vida, fome e hidratação<br>
 [ ] Limitar o avanço da água no terreno<br>
 
+### Inventário
+[ ] Adicionar ícones automaticamente com base na textura
+
 ### Iluminação
 [ ] Iluminação ambiente e oclusão ambiente voxel, semelhante ao do Minecraft
+
+### Chunks
+[ ] Apenas gerar as chunks onde a câmera (jogador) está olhando
 
 ## Contribuição
 
@@ -45,7 +55,7 @@ para um gerenciamento mais especifico do Aperos Voxel.
 Por favor, ao enviar um pull request, atente-se ao padrão de nomenclatura dos métodos e variáveis, 
 espaçamento entre os métodos etc.
 
-Obs.: O projeto está utilizando opengl3 pois o meu humilde laptop não
+Obs.: O projeto está utilizando opengl3 pois o meu humilde notebook não
 roda bem no vulkan :<
 
 **Textura**: [Excalibur](https://www.curseforge.com/minecraft/texture-packs/excalibur)

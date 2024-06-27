@@ -15,14 +15,14 @@ const WaterUpdater = preload("./water.gd")
 @onready var _terrain : VoxelTerrain = $VoxelTerrain
 @onready var _characters_container : Node = $Players
 
-var _network_mode := NETWORK_MODE_SINGLEPLAYER
-var _ip := ""
-var _port := -1
+var _network_mode : int = NETWORK_MODE_SINGLEPLAYER
+var _ip : String = ""
+var _port : int = -1
 
 # Initially needed because when running multiple instances in the editor, Godot is mixing up the
 # outputs of server and clients in the same output console...
 class Logger:
-	var prefix := ""
+	var prefix : String = ""
 	
 	func debug(msg: String):
 		print(prefix, msg)

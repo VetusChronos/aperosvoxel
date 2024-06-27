@@ -14,8 +14,8 @@ signal upnp_toggled(pressed)
 
 @onready var globals := get_node("/root/Globals")
 
-var save_dir : String = "res://resources/worlds/"
-var splashes_dir : String = "res://assets/texts/splashes.txt"
+var save_dir : String = "user://resources/worlds/"
+var splashes_dir : String = "user://assets/texts/splashes.txt"
 
 
 func _ready() -> void:
@@ -32,7 +32,7 @@ func _ready() -> void:
 		print("'worlds' directory deleted.")
 	else:
 		print("Directory 'worlds' does not exist.")
-	
+
 	# Splashes texts
 	if FileAccess.file_exists(splashes_dir):
 		var splash_file = FileAccess.open(splashes_dir, FileAccess.READ)
@@ -44,7 +44,7 @@ func _ready() -> void:
 		
 		splashes_text.text = random_splash
 	else:
-		printerr("The splashes.txt file was not found.")
+		print("The splashes.txt file was not found.")
 
 
 func _on_singleplayer_button_pressed():
@@ -59,11 +59,10 @@ func _on_back_button_pressed() -> void:
 
 func _on_create_pressed() -> void:
 	# If the seed is not placed, use the random seed from the placeholder
-	globals._seed = int(seed_text.text)
-	if globals._seed == 0:
+	if globals._terrain_noise.seed == 0:
 		globals.set_noise_seed(int(globals.random_seed))
 	else:
-		globals.set_noise_seed(globals._seed)
+		globals.set_noise_seed(int(seed_text.text))
 		
 	singleplayer_requested.emit()
 

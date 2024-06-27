@@ -1,6 +1,6 @@
 # Aperos Voxel
 
-Aperos Voxel is a voxel game inspired by Minecraft 
+Aperos Voxel is a RPG survival voxel game inspired by Minecraft 
 built in the Godot Engine v4.3.beta2 using the [godot_voxel](https://github.com/Zylann/godot_voxel) module.
 
 It's currently in alpha phase and has various issues.
@@ -14,13 +14,17 @@ This project is based on [voxelgame](https://github.com/Zylann/voxelgame), and a
 - In-game [debug information](https://github.com/godot-extended-libraries/godot-debug-menu) accessible by pressing F3. Press F3 twice for full details
 - Inventory with icons (not automatically generated)
 - Placing and breaking terrain blocks
-- World limit of 536,870,911 in all directions
+- World limit of 536,870,911 in all horizontal directions
 - World saving via stream (limited)
 
 ## TO-DO:
 
+### Assets
+[x] Automatically download assets if they do not exist in the `user` directory<br>
+[ ] Configuration script to automatically download assets (for developers)<br>
+
 ### Terrain
-[ ] More comprehensive biome generation, considering temperature, erosion, and altitude
+[ ] More comprehensive biome generation, considering temperature, humidity, erosion, and altitude
 
 ### Save
 [ ] Saving worlds based on name, ID, and version
@@ -30,8 +34,14 @@ This project is based on [voxelgame](https://github.com/Zylann/voxelgame), and a
 [ ] Life, hunger, and hydration system<br>
 [ ] Limiting water spread across terrain<br>
 
+### Inventory
+[ ] Automatically add icons based on texture
+
 ### Lighting
-[ ] Ambient lighting and voxel ambient occlusion, similar to Minecraft
+[ ] Ambient voxel lighting and ambient occlusion, similar to Minecraft
+
+### Chunks
+[ ] Just generate the chunks where the camera (player) is looking
 
 ## Contribution
 
