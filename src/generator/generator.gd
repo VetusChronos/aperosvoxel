@@ -18,6 +18,8 @@ const _moore_dirs = [
 	Vector3(1, 0, 1)
 ]
 
+var _voxel_library = preload("res://src/blocks/voxel_library.tres")
+
 var _biomes = Biome.new()
 var tree_generator = TreeGenerator.new()
 
@@ -90,6 +92,8 @@ func _fill_chunk(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size: in
 					_biomes._generate_plains(buffer, x, z, relative_height, block_size, height, rng)
 				_biomes.biomes.BIOME_SAVANNA:
 					_biomes._generate_savanna(buffer, x, z, relative_height, block_size, rng)
+				_biomes.biomes.BIOME_SNOWY_FOREST:
+					_biomes._generate_snowy_forest(buffer, x, z, relative_height, block_size, height, rng)
 				_:
 					_biomes._generate_default(buffer, x, z, relative_height, block_size, height, rng)
 
@@ -110,7 +114,7 @@ func _fill_chunk(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size: in
 func _generate_trees(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size: int, chunk_pos: Vector3):
 	if origin_in_voxels.y <= _trees_max_y and origin_in_voxels.y + block_size >= _trees_min_y:
 		var voxel_tool = buffer.get_voxel_tool()
-		var structure_instances = []
+		var structure_instances : Array = []
 		_get_tree_instances_in_chunk(chunk_pos, origin_in_voxels, block_size, structure_instances)
 
 		var block_aabb = AABB(Vector3(), buffer.get_size() + Vector3i(1, 1, 1))
@@ -122,7 +126,8 @@ func _generate_trees(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size
 			var aabb = AABB(lower_corner_pos, structure.voxels.get_size() + Vector3i(1, 1, 1))
 
 			if aabb.intersects(block_aabb):
-				voxel_tool.paste_masked(lower_corner_pos, structure.voxels, 1 << VoxelBuffer.CHANNEL_TYPE, VoxelBuffer.CHANNEL_TYPE, _biomes.block_types.AIR)
+				voxel_tool.paste_masked(lower_corner_pos, structure.voxels, 1 << VoxelBuffer.CHANNEL_TYPE, 
+					VoxelBuffer.CHANNEL_TYPE, _biomes.block_types.AIR)
 
 
 func _get_tree_instances_in_chunk(cpos: Vector3, offset: Vector3, chunk_size: int, tree_instances: Array):

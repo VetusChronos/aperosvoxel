@@ -18,6 +18,7 @@ var block_types : Dictionary = {
 	"DEAD_SHRUB": 26,
 	"STONE": 27,
 	"SAND": 28,
+	"SNOW": 29
 }
 
 # TODO: Read from a JSON
@@ -41,31 +42,28 @@ func _get_height_at(x: int, z: int) -> int:
 	return height
 
 
-# TODO: Determine biome based on temperature and humidity
+# TODO: Determine biome based on humidity too
 func _get_biome_at(x: int, z: int) -> int:
-	var temperature = Globals._temperature_noise.get_noise_2d(x, z)
-	var humidity = Globals._humidity_noise.get_noise_2d(x, z)
+	var temperature = (Globals._temperature_noise.get_noise_2d(x, z) + 1) / 2 # Normalizando para [0, 1]
+	var humidity = (Globals._humidity_noise.get_noise_2d(x, z) + 1) / 2 # Normalizando para [0, 1]
+
+	temperature = temperature * 1.2 - 0.1 # Expandindo para [-0.1, 1.1]
+	humidity = humidity * 1.2 - 0.1 # Expandindo para [-0.1, 1.1]
+
+	#print("Temperature: ", temperature, ", Humidity: ", humidity)
 	
-	if temperature > 0.7:
-		if humidity < 0.3:
-			return biomes.BIOME_DESERT
-		else:
-			return biomes.BIOME_SAVANNA
-	elif temperature > 0.4:
-		if humidity < 0.3:
-			return biomes.BIOME_PLAINS
-		else:
-			return biomes.BIOME_FOREST
-	elif temperature > 0.2:
-		if humidity < 0.3:
-			return biomes.BIOME_TAIGA
-		else:
-			return biomes.BIOME_SWAMP
-	else:
-		if humidity < 0.3:
-			return biomes.BIOME_TUNDRA
-		else:
-			return biomes.BIOME_SNOWY_FOREST
+	var biomes_limits = [
+		[0.65, biomes.BIOME_DESERT],
+		[0.45, biomes.BIOME_SAVANNA],
+		[0.35, biomes.BIOME_FOREST],
+		[0.4, biomes.BIOME_PLAINS],
+		[0.35, biomes.BIOME_SNOWY_FOREST]
+	]
+	
+	for limit in biomes_limits:
+		if temperature > limit[0]:
+			return limit[1]
+
 	return biomes.BIOME_PLAINS
 
 
@@ -107,13 +105,20 @@ func _generate_savanna(buffer: VoxelBuffer, x: int, z: int, rel_height: int, blo
 			buffer.set_voxel(foliage, x, rel_height, z, _CHANNEL)
 
 
+func _generate_snowy_forest(buffer: VoxelBuffer, x: int, z: int, rel_height: int, block_size: int, height: int, rng: RandomNumberGenerator):
+	if rel_height > block_size:
+		buffer.fill_area(block_types.DIRT, Vector3(x, 0, z), Vector3(x + 1, block_size, z + 1), _CHANNEL)
+	elif rel_height > 0:
+		buffer.fill_area(block_types.DIRT, Vector3(x, 0, z), Vector3(x + 1, rel_height, z + 1), _CHANNEL)
+		if height >= 0:
+			buffer.set_voxel(block_types.SNOW, x, rel_height - 1, z, _CHANNEL)
+
+
 func _generate_default(buffer: VoxelBuffer, x: int, z: int, rel_height: int, block_size: int, height: int, rng: RandomNumberGenerator):
 	if rel_height > block_size:
-		buffer.fill_area(block_types.DIRT,
-			Vector3(x, 0, z), Vector3(x + 1, block_size, z + 1), _CHANNEL)
+		buffer.fill_area(block_types.DIRT, Vector3(x, 0, z), Vector3(x + 1, block_size, z + 1), _CHANNEL)
 	elif rel_height > 0:
-		buffer.fill_area(block_types.DIRT,
-			Vector3(x, 0, z), Vector3(x + 1, rel_height, z + 1), _CHANNEL)
+		buffer.fill_area(block_types.DIRT, Vector3(x, 0, z), Vector3(x + 1, rel_height, z + 1), _CHANNEL)
 		if height >= 0:
 			buffer.set_voxel(block_types.GRASS, x, rel_height - 1, z, _CHANNEL)
 			if rel_height < block_size and rng.randf() < 0.2:

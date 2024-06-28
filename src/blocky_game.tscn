@@ -13,26 +13,27 @@
 directory = "user://resources/worlds"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_g45w2"]
-noise_type = 3
-frequency = 0.001
-fractal_octaves = 2
-domain_warp_enabled = true
+noise_type = 2
+seed = 1
+frequency = 0.1
+fractal_octaves = 1
+cellular_return_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_20gc6"]
 noise_type = 3
-frequency = 0.001
-fractal_octaves = 6
-fractal_lacunarity = 2.2
-domain_warp_enabled = true
+frequency = 0.1
 domain_warp_amplitude = 15.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ebfo8"]
-noise_type = 3
+noise_type = 2
+frequency = 0.1
+fractal_type = 0
 fractal_octaves = 3
+cellular_return_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sft5d"]
 noise_type = 3
-frequency = 0.001
+frequency = 0.1
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_aoiog"]
 noise_type = 3
