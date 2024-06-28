@@ -6,7 +6,6 @@ var log_type : int = 1
 var leaves_type : int = 2
 var channel : VoxelBuffer.ChannelId = VoxelBuffer.CHANNEL_TYPE
 
-
 func generate() -> Structure:
 	var voxels := {}
 	# Trunk
@@ -18,13 +17,20 @@ func generate() -> Structure:
 	var leaves_start := trunk_len - 3
 	var leaves_end := trunk_len + 2
 	for y in range(leaves_start, leaves_end):
-		for x in range(-2, 3):
-			for z in range(-2, 3):
-				if abs(x) == 2 and abs(z) == 2 and (y == leaves_start or y == leaves_end):
-					# Skip corners on the top and bottom layer
-					continue
-				if not (x == 0 and y == trunk_len and z == 0):  # Skip trunk position
-					voxels[Vector3(x, y, z)] = leaves_type
+		if y < leaves_start + 2:
+			# Square layers at the bottom
+			for x in range(-2, 3):
+				for z in range(-2, 3):
+					if not (x == 0 and y == trunk_len and z == 0):  # Skip trunk position
+						voxels[Vector3(x, y, z)] = leaves_type
+		else:
+			# Rounded layers on top
+			var radius = 1 - abs(y - trunk_len)
+			for x in range(-radius, radius + 1):
+				for z in range(-radius, radius + 1):
+					if x * x + z * z <= radius * radius:
+						if not (x == 0 and y == trunk_len and z == 0):  # Skip trunk position
+							voxels[Vector3(x, y, z)] = leaves_type
 
 	# Make structure
 	var aabb := AABB()
