@@ -1,4 +1,5 @@
 extends Node3D
+class_name Character
 
 @export var speed : float = 5.0
 @export var gravity : float = 9.8

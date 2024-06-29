@@ -44,11 +44,11 @@ func _get_height_at(x: int, z: int) -> int:
 
 # TODO: Determine biome based on humidity too
 func _get_biome_at(x: int, z: int) -> int:
-	var temperature = (Globals._temperature_noise.get_noise_2d(x, z) + 1) / 2 # Normalizando para [0, 1]
-	var humidity = (Globals._humidity_noise.get_noise_2d(x, z) + 1) / 2 # Normalizando para [0, 1]
+	var temperature = (Globals._temperature_noise.get_noise_2d(x, z) + 1) / 2 # Normalizing to [0, 1]
+	var humidity = (Globals._humidity_noise.get_noise_2d(x, z) + 1) / 2 # Normalizing to [0, 1]
 
-	temperature = temperature * 1.2 - 0.1 # Expandindo para [-0.1, 1.1]
-	humidity = humidity * 1.2 - 0.1 # Expandindo para [-0.1, 1.1]
+	temperature = temperature * 1.2 - 0.1 # Expanding to [-0.1, 1.1]
+	humidity = humidity * 1.2 - 0.1 # Expanding to [-0.1, 1.1]
 
 	#print("Temperature: ", temperature, ", Humidity: ", humidity)
 	

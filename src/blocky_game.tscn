@@ -67,7 +67,7 @@ mesher = ExtResource("1")
 gi_mode = 1
 cast_shadow = 2
 bounds = AABB(-5.36871e+08, -128, -5.36871e+08, 1.07374e+09, 256, 1.07374e+09)
-max_view_distance = 256
+max_view_distance = 60
 generate_collisions = false
 run_stream_in_editor = false
 

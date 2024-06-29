@@ -18,17 +18,15 @@ const _moore_dirs = [
 	Vector3(1, 0, 1)
 ]
 
-var _voxel_library = preload("res://src/blocks/voxel_library.tres")
-
 var _biomes = Biome.new()
 var tree_generator = TreeGenerator.new()
 
-var _tree_structures : Array = []
-var _heightmap_range : int = 0
-var _heightmap_min_y : int = 0
-var _heightmap_max_y : int = 128
-var _trees_min_y : int = 0
-var _trees_max_y : int = 0
+var _tree_structures: Array = []
+var _heightmap_range: int = 0
+var _heightmap_min_y: int = 0
+var _heightmap_max_y: int = 128
+var _trees_min_y: int = 0
+var _trees_max_y: int = 0
 
 var rng = RandomNumberGenerator.new()
 
@@ -42,11 +40,11 @@ func _init():
 func _generate_tree_structures():
 	tree_generator.log_type = _biomes.block_types.LOG
 	tree_generator.leaves_type = _biomes.block_types.LEAVES
-	for i in 16:
-		var s = tree_generator.generate()
-		_tree_structures.append(s)
+	_tree_structures.resize(16)
+	for i in range(16):
+		_tree_structures[i] = tree_generator.generate()
 
-	var tallest_tree_height = 0
+	var tallest_tree_height : int = 0
 	for structure in _tree_structures:
 		var h = int(structure.voxels.get_size().y)
 		if tallest_tree_height < h:
@@ -56,9 +54,9 @@ func _generate_tree_structures():
 
 
 func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
-	var block_size := int(buffer.get_size().x)
-	var oy := origin_in_voxels.y
-	var chunk_pos := Vector3(
+	var block_size : int = int(buffer.get_size().x)
+	var oy = origin_in_voxels.y
+	var chunk_pos = Vector3(
 		origin_in_voxels.x >> 4,
 		origin_in_voxels.y >> 4,
 		origin_in_voxels.z >> 4)
@@ -77,12 +75,28 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int):
 func _fill_chunk(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size: int, chunk_pos: Vector3, oy: int):
 	rng.seed = _get_chunk_seed_2d(chunk_pos)
 
+	var height_map : PackedInt32Array = PackedInt32Array()
+	height_map.resize(block_size * block_size)
+	var biome_map : PackedInt32Array = PackedInt32Array()
+	biome_map.resize(block_size * block_size)
+
+	# First loop: calculate height and biome and store in arrays
 	for z in range(block_size):
+		var z_offset = z * block_size
 		for x in range(block_size):
+			var index = z_offset + x
 			var gx = origin_in_voxels.x + x
 			var gz = origin_in_voxels.z + z
-			var height = _biomes._get_height_at(gx, gz)
-			var biome = _biomes._get_biome_at(gx, gz)
+			height_map[index] = _biomes._get_height_at(gx, gz)
+			biome_map[index] = _biomes._get_biome_at(gx, gz)
+
+	# Second loop: generate blocks using the stored values
+	for z in range(block_size):
+		var z_offset = z * block_size
+		for x in range(block_size):
+			var index = z_offset + x
+			var height = height_map[index]
+			var biome = biome_map[index]
 			var relative_height = height - oy
 
 			match biome:
@@ -99,9 +113,7 @@ func _fill_chunk(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size: in
 
 			# Water generation
 			if height < 0:
-				var start_relative_height := 0
-				if relative_height > 0:
-					start_relative_height = relative_height
+				var start_relative_height = max(relative_height, 0)
 				if oy < 0:
 					buffer.fill_area(_biomes.block_types.WATER_FULL,
 						Vector3(x, start_relative_height, z),
@@ -113,11 +125,11 @@ func _fill_chunk(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size: in
 
 func _generate_trees(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size: int, chunk_pos: Vector3):
 	if origin_in_voxels.y <= _trees_max_y and origin_in_voxels.y + block_size >= _trees_min_y:
-		var voxel_tool = buffer.get_voxel_tool()
-		var structure_instances : Array = []
+		var voxel_tool : VoxelTool = buffer.get_voxel_tool()
+		var structure_instances: Array = []
 		_get_tree_instances_in_chunk(chunk_pos, origin_in_voxels, block_size, structure_instances)
 
-		var block_aabb = AABB(Vector3(), buffer.get_size() + Vector3i(1, 1, 1))
+		var block_aabb : AABB = AABB(Vector3(), buffer.get_size() + Vector3i(1, 1, 1))
 
 		for structure_instance in structure_instances:
 			var pos = structure_instance[0]
@@ -131,22 +143,21 @@ func _generate_trees(buffer: VoxelBuffer, origin_in_voxels: Vector3i, block_size
 
 
 func _get_tree_instances_in_chunk(cpos: Vector3, offset: Vector3, chunk_size: int, tree_instances: Array):
-	var rng = RandomNumberGenerator.new()
 	rng.seed = _get_chunk_seed_2d(cpos)
 
-	var biomes_blacklist = [
+	var biomes_blacklist : Array = [
 		_biomes.biomes.BIOME_DESERT,
 		_biomes.biomes.BIOME_PLAINS
 	]
 
-	for i in 4:
-		var pos = Vector3(rng.randi() % chunk_size, 0, rng.randi() % chunk_size)
+	for i in range(4):
+		var pos : Vector3 = Vector3(rng.randi() % chunk_size, 0, rng.randi() % chunk_size)
 		pos += cpos * chunk_size
 		pos.y = _biomes._get_height_at(pos.x, pos.z)
 
 		if pos.y > 0 and _biomes._get_biome_at(pos.x, pos.z) not in biomes_blacklist:
 			pos -= offset
-			var si = rng.randi() % len(_tree_structures)
+			var si = rng.randi() % _tree_structures.size()
 			var structure = _tree_structures[si]
 			tree_instances.append([pos.round(), structure])
 

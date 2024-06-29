@@ -2,19 +2,19 @@ extends Node
 
 @onready var _terrain : VoxelTerrain = get_parent().get_node(^"VoxelTerrain")
 
-const NETWORK_REPORT_INTERVAL = 1.0
+const NETWORK_REPORT_INTERVAL : float = 1.0
 
-var _network_report_time := NETWORK_REPORT_INTERVAL
-var _network_stats := []
+var _network_report_time : float = NETWORK_REPORT_INTERVAL
+var _network_stats : Array = []
 
 
 func _process(delta: float):
 	DDD.set_text("Seed", int(Globals._terrain_noise.seed))
 	
-	"""
 	var sm := OS.get_static_memory_usage()
 	DDD.set_text("Static memory", _format_memory(sm))
 
+	"""
 	_show_voxel_stats()
 	
 	var mp := get_tree().get_multiplayer()

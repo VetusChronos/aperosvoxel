@@ -65,5 +65,6 @@ anchors_preset = 15
 color = Color(0, 0, 0, 0.501961)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="."]
+view_distance = 60
 
 [connection signal="changed" from="Inventory" to="HotBar" method="_on_Inventory_changed"]
